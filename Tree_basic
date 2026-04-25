@@ -1,0 +1,102 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Codechef
+{
+    
+    public static class Node{
+        int val;
+        Node left;
+        Node right;
+        
+        public Node(int val){
+            this.val = val;
+        }
+    }
+    // display (printing the nodes)
+    public static void display(Node root){
+        if(root == null) return;
+        
+        System.out.print(root.val + "->");
+        if(root.left != null) System.out.print(root.left.val+",");
+        if(root.right != null) System.out.print(root.right.val);
+        System.out.println();
+        
+        
+        display(root.left);
+        display(root.right);
+    }
+    
+    // Size (count the no of nodes)
+    public static int size(Node root){
+        if(root == null) return 0;
+        return 1 + size(root.left) + size(root.right);
+    }
+    
+    // Sum (sum of the all nodes value)
+    public static int sumOf(Node root){
+        if(root == null) return 0;
+        return root.val + sumOf(root.left) + sumOf(root.right);
+    }
+    
+    // Max (maximum value of the node in the tree)
+    public static int maxOf(Node root){
+        if(root == null) return Integer.MIN_VALUE;
+        int a = root.val;
+        int b = maxOf(root.left);
+        int c = maxOf(root.right);
+        return Math.max(a,Math.max(b,c));
+    }
+    
+    // Height (claculate the height edge wise is ( total levels of nodes -1))
+    public static int height(Node root){
+        if(root == null) return 0;
+        if(root.left == null && root.right == null) return 0;
+        return 1 + Math.max(height(root.left),height(root.right));
+    }
+    
+     // Min (minimum value of the nodes in the tree)
+    public static int Min(Node root){
+        if(root == null) return Integer.MAX_VALUE;
+        int a = root.val;
+        int b = Min(root.left);
+        int c = Min(root.right);
+        return Math.min(a,Math.min(b,c));
+    }
+    
+    // Product (product of the all nodes value in the tree)
+    public static int prod(Node root){
+        if(root == null) return 1;
+        return root.val * prod(root.left) * prod(root.right);
+    }
+    
+    
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		// your code goes here
+		
+		Node root = new Node(10);
+		Node a = new Node(20);
+		Node b = new Node(511);
+		Node c = new Node(-40);
+		Node d = new Node(510);
+		Node e = new Node(60);
+		Node f = new Node(70);
+		root.left = a;
+		root.right = b;
+		a.left = c;
+		a.right = d;
+		b.left = e;
+		b.right = f;
+		display(root);
+		System.out.println(size(root));
+		System.out.println(sumOf(root));
+		System.out.println(maxOf(root));
+		System.out.println(height(root));
+		System.out.println(Min(root));
+		System.out.println(prod(root));
+		
+
+	}
+}
